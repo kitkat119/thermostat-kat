@@ -4,6 +4,8 @@ describe('Thermostat', function() {
     thermostat = new Thermostat();
     defaultTemp = 20;
     minimumTemp = 10;
+    maximumTemp = 32;
+    maxPowerSavingTemp = 25;
   });
 
   it('is created with temperature 20 degrees', function() {
@@ -37,6 +39,23 @@ describe('Thermostat', function() {
         thermostat.togglePowerSaving();
       }
       expect(thermostat.powerSaving()).toBeTruthy();
+    });
+    it('restricts temp to max 25', function() {
+      while(thermostat.temperature() < maxPowerSavingTemp) {
+        thermostat.increaseTemp();
+      }
+      thermostat.increaseTemp();
+      expect(thermostat.temperature()).toEqual(maxPowerSavingTemp);
+    });
+    describe('power saving is off', function() {
+      it('restricts temp to max 32', function() {
+        thermostat.togglePowerSaving();
+        while(thermostat.temperature() < maximumTemp) {
+          thermostat.increaseTemp();
+        }
+        thermostat.increaseTemp();
+        expect(thermostat.temperature()).toEqual(maximumTemp);
+      });
     });
   });
 });
