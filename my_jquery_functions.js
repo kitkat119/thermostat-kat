@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-  var thermostat, powerSavingMessage;
+  var thermostat, powerSavingMessage, updateTemperature, updateEnergyUsage, updatePowerSaving, energyUsageMessage, updateElements;
 
   thermostat = new Thermostat();
   powerSavingMessage = function() {
@@ -17,30 +17,27 @@ $( document ).ready(function() {
   updatePowerSaving = function() {
     $("#power-saving").text(powerSavingMessage());
   };
-
-  updateTemperature();
-  updateEnergyUsage();
-  updatePowerSaving();
+  updateElements = function() {
+    updateTemperature();
+    updateEnergyUsage();
+    updatePowerSaving();
+  };
+updateElements();
 
   $("#up").click(function(){
     thermostat.increaseTemp()
-    updateTemperature();
-    updateEnergyUsage();
+    updateElements();
   });
   $("#down").click(function(){
     thermostat.decreaseTemp()
-    updateTemperature()
-    updateEnergyUsage();
+    updateElements();
   });
   $("#power-save").click(function(){
     thermostat.togglePowerSaving()
-    updatePowerSaving();
-    updateTemperature()
+    updateElements();
   });
   $("#reset").click(function(){
     thermostat.reset();
-    updatePowerSaving();
-    updateTemperature()
-    updateEnergyUsage();
+    updateElements();
   });
 });
