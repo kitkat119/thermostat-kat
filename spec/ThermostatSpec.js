@@ -40,17 +40,17 @@ describe('Thermostat', function() {
   });
   describe('power saving', function() {
     it('is on by default', function() {
-      expect(thermostat.powerSaving()).toBeTruthy();
+      expect(thermostat._powerSaving).toBeTruthy();
     });
     it('can be turned off', function() {
       thermostat.togglePowerSaving();
-      expect(thermostat.powerSaving()).toBeFalsy();
+      expect(thermostat._powerSaving).toBeFalsy();
     });
     it('can be turned on again', function() {
       for(var i = 1; i <= 2; i++) {
         thermostat.togglePowerSaving();
       }
-      expect(thermostat.powerSaving()).toBeTruthy();
+      expect(thermostat._powerSaving).toBeTruthy();
     });
     it('restricts temp to max 25', function() {
       while(thermostat.temperature() < maxPowerSavingTemp) {
