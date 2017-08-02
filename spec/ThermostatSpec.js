@@ -1,5 +1,7 @@
+'use strict';
+
 describe('Thermostat', function() {
-  var thermostat, defaultTemp, minimumTemp, maxPowerSavingTemp, arbitraryIncrease;
+  var thermostat, defaultTemp, minimumTemp, maximumTemp, maxPowerSavingTemp, arbitraryIncrease;
   beforeEach(function() {
     thermostat = new Thermostat();
     defaultTemp = 20;
@@ -29,7 +31,7 @@ describe('Thermostat', function() {
   });
   describe('reset', function() {
     it('returns the temperature to 20', function() {
-      for(i = 1; i <= arbitraryIncrease; i++) {
+      for(var i = 1; i <= arbitraryIncrease; i++) {
         thermostat.increaseTemp();
       }
       thermostat.reset()
@@ -74,6 +76,19 @@ describe('Thermostat', function() {
       }
       thermostat.increaseTemp();
       expect(thermostat.temperature()).toEqual(maximumTemp);
+    });
+  });
+  describe('energy usage', function() {
+    it('returns low-usage when temp < 18', function() {
+      spyOn(thermostat, 'temperature').and.returnValue(17);
+      expect(thermostat.energyUsage()).toEqual("low-usage");
+    });
+    it('returns medium-usage when temp < 25', function() {
+      expect(thermostat.energyUsage()).toEqual("medium-usage");
+    });
+    it('returns hign-usage otherwise', function() {
+      spyOn(thermostat, 'temperature').and.returnValue(26);
+      expect(thermostat.energyUsage()).toEqual("high-usage");
     });
   });
 });
