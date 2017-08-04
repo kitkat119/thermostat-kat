@@ -10,6 +10,7 @@ $( document ).ready(function() {
   };
   updateTemperature = function() {
     $('#temperature').text(thermostat.temperature());
+    $('#temperature').attr('class', thermostat.energyUsage());
   };
   updateEnergyUsage = function() {
     $('#energy-usage').text(energyUsageMessage());
@@ -44,7 +45,7 @@ updateElements();
     event.preventDefault();
     var city = $('#current-city').val();
     displayWeather(city);
-    
+
   });
   function displayWeather(city) {
     var url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city;
@@ -54,4 +55,7 @@ updateElements();
       $('#current-temperature').text(response.main.temp);
     });
   };
+  function updateTemp() {
+
+  }
 });
