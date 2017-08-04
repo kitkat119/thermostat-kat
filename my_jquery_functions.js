@@ -28,6 +28,7 @@ updateElements();
   $("#up").click(function(){
     thermostat.increaseTemp()
     updateElements();
+    storeTemp();
   });
   $("#down").click(function(){
     thermostat.decreaseTemp()
@@ -56,7 +57,7 @@ updateElements();
       $('#city').text(response.name);
     });
   };
-  function updateTemp() {
-
+  function storeTemp() {
+    $.post("http://localhost:4567/temperature", { temp: thermostat.temperature()});
   }
 });
