@@ -1,5 +1,18 @@
 body {
   color: #000000;
+  background-color: #FFD101;
+  text-align: center;
+}
+
+h1 {
+  font-size: 36px;
+  background-color: #DDE0E3;
+  padding: 20px 10px 20px 10px;
+  border: 1px solid #5D6063;
+}
+
+h1, h2, h3 {
+  font-family: "Helvetica", "Arial";
 }
 .low-usage {
   color: green;

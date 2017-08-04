@@ -53,6 +53,7 @@ updateElements();
     var units = '&units=metric';
     $.get(url + token + units, function(response) {
       $('#current-temperature').text(response.main.temp);
+      $('#city').text(response.name);
     });
   };
   function updateTemp() {
