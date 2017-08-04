@@ -33,6 +33,7 @@ updateElements();
   $("#down").click(function(){
     thermostat.decreaseTemp()
     updateElements();
+    storeTemp();
   });
   $("#power-save").click(function(){
     thermostat.togglePowerSaving()
@@ -59,5 +60,11 @@ updateElements();
   };
   function storeTemp() {
     $.post("http://localhost:4567/temperature", { temp: thermostat.temperature()});
+  }
+
+  function getTemp() {
+    $.get("http://localhost:4567/temperature", function(resp){
+      $('#temperature').text(resp.temp);
+    });
   }
 });
